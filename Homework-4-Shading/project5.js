@@ -114,13 +114,13 @@ class MeshDrawer
 		
 		// Up to this point, vertex positions (x, y, z), normal vectors (x, y, z) and texture coordinates (u, v -> s, t) must be uploaded to the GPU by binding and using the previously defined buffers to correcly manage these details. In this case, the constant gl.STATIC_DRAW has been specified in the gl.bufferData method to indicate that the buffers' content will not change frequently after inizialization
 		gl.bindBuffer( gl.ARRAY_BUFFER, this.vertexBuffer );
-        gl.bufferData( gl.ARRAY_BUFFER, new Float32Array( vertPos ), gl.STATIC_DRAW );
+        	gl.bufferData( gl.ARRAY_BUFFER, new Float32Array( vertPos ), gl.STATIC_DRAW );
 		
 		gl.bindBuffer( gl.ARRAY_BUFFER, this.normalBuffer );
-        gl.bufferData( gl.ARRAY_BUFFER, new Float32Array( normals ), gl.STATIC_DRAW );
+        	gl.bufferData( gl.ARRAY_BUFFER, new Float32Array( normals ), gl.STATIC_DRAW );
 		
 		gl.bindBuffer( gl.ARRAY_BUFFER, this.textureBuffer );
-        gl.bufferData( gl.ARRAY_BUFFER, new Float32Array( texCoords ), gl.STATIC_DRAW );
+        	gl.bufferData( gl.ARRAY_BUFFER, new Float32Array( texCoords ), gl.STATIC_DRAW );
 	}
 	
 	// This method is called when the user changes the state of the
@@ -173,7 +173,7 @@ class MeshDrawer
 		gl.useProgram( this.prog );
         
 		// First, the transformation matrices (matrixMVP analogous to the trans matrix from the previous homework, matrixMV for obtaining the view space representation of vertex positions and matrixNormal) need to be passed to the vertex shader, sending their non-transposed version, as WebGL uses column-major order by default, to the mvp, mv and matrixNormal uniforms, respectively
-        gl.uniformMatrix4fv( this.mvp, false, matrixMVP );
+        	gl.uniformMatrix4fv( this.mvp, false, matrixMVP );
 		gl.uniformMatrix4fv( this.mv, false, matrixMV );
 		gl.uniformMatrix3fv( this.matrixNormalPos, false, matrixNormal );
 
@@ -183,18 +183,18 @@ class MeshDrawer
 		gl.bindBuffer( gl.ARRAY_BUFFER, this.vertexBuffer );
         
 		// 2) defining how vertex positions are read from it, specifying the number of components (3 -> x, y, z), the data type, and additional parameters, including no normalization 
-        gl.vertexAttribPointer( this.vertPos, 3, gl.FLOAT, false, 0, 0 );
+        	gl.vertexAttribPointer( this.vertPos, 3, gl.FLOAT, false, 0, 0 );
 		
 		// 3) enabling the vertex position attribute
 		gl.enableVertexAttribArray( this.vertPos );
 		
 		gl.bindBuffer( gl.ARRAY_BUFFER, this.normalBuffer );
-        gl.vertexAttribPointer( this.norPos, 3, gl.FLOAT, false, 0, 0 );
+        	gl.vertexAttribPointer( this.norPos, 3, gl.FLOAT, false, 0, 0 );
 		gl.enableVertexAttribArray( this.norPos );
 		
 		// The same approach is also applied to the texture coordinates, with some adjustment for their properties (i.e. 2 components instead of 3 as with vertex positions)
 		gl.bindBuffer( gl.ARRAY_BUFFER, this.textureBuffer );
-        gl.vertexAttribPointer( this.txcPos, 2, gl.FLOAT, false, 0, 0 );
+        	gl.vertexAttribPointer( this.txcPos, 2, gl.FLOAT, false, 0, 0 );
 		gl.enableVertexAttribArray( this.txcPos );
 		
 		// In conclusion, the triangles, whose shape/primitive has been stated using gl.TRIANGLES, are drawn considering the data in the buffers and specifying some parameter, such as the offset in that structure (equal to 0) and the number of elements to be rendered
